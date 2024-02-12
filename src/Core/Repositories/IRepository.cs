@@ -1,7 +1,6 @@
 ﻿using Core.Paging;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
-using System.Linq.Dynamic;
 
 namespace Core.Repositories;
 

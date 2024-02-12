@@ -6,10 +6,10 @@ public class Dynamic
     public Filter? Filter { get; set; }
 
     public Dynamic()
-    {            
+    {
     }
 
-    public Dynamic(IEnumerable<Sort>? sort, Filter? filter)
+    public Dynamic(IEnumerable<Sort>? sort, Filter? filter) : this()
     {
         Sort = sort;
         Filter = filter;
