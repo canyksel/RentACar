@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Brands.Models;
+﻿namespace Application.Features.Brands.Dtos.Brands;
 
 public class BrandListDto
 {
