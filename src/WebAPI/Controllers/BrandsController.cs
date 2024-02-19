@@ -1,4 +1,5 @@
 ﻿using Application.Features.Brands.Commands.CreateBrand;
+using Application.Features.Brands.Commands.UpdateBrand;
 using Application.Features.Brands.Dtos.Brands;
 using Application.Features.Brands.Models;
 using Application.Features.Brands.Queries.GetByIdBrand;
@@ -32,6 +33,13 @@ namespace WebAPI.Controllers
         {
             BrandGetByIdDto brandGetByIdDto = await Mediator.Send(getByIdBrandQuery);
             return Ok(brandGetByIdDto);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateBrandCommand updateBrandCommand)
+        {
+            UpdatedBrandDto result = await Mediator.Send(updateBrandCommand);
+            return NoContent();
         }
     }
 }

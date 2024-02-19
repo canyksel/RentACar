@@ -3,7 +3,7 @@ using Core.CrossCuttingConcerns.Exceptions;
 using Core.Paging;
 using Domain.Entities;
 
-namespace Application.Features.Brands.Rules;
+namespace Application.Features.Brands.Rules.Brands;
 
 public class BrandBusinessRules
 {
@@ -23,5 +23,11 @@ public class BrandBusinessRules
     public void BrandShouldExistsWhenRequested(Brand brand)
     {
         if (brand is null) throw new BusinessException("Brand does not exists.");
+    }
+
+    public async Task BrandNameCanNotBeDuplicatedWhenUpdated(int id, string name)
+    {
+        Brand? result = await _brandRepository.GetAsync(b => b.Id == id && b.Name == name);
+        if (result is not null) throw new BusinessException("Brand already exists.");
     }
 }

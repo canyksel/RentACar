@@ -1,4 +1,4 @@
-﻿using Application.Features.Brands.Rules;
+﻿using Application.Features.Brands.Rules.Brands;
 using Core.Pipelines.Validation;
 using FluentValidation;
 using MediatR;
