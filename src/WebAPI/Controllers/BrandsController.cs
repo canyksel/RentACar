@@ -1,4 +1,5 @@
 ﻿using Application.Features.Brands.Commands.CreateBrand;
+using Application.Features.Brands.Commands.DeleteBrand;
 using Application.Features.Brands.Commands.UpdateBrand;
 using Application.Features.Brands.Dtos.Brands;
 using Application.Features.Brands.Models;
@@ -39,6 +40,13 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Update([FromBody] UpdateBrandCommand updateBrandCommand)
         {
             UpdatedBrandDto result = await Mediator.Send(updateBrandCommand);
+            return NoContent();
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] DeleteBrandCommand deleteBrandCommand)
+        {
+            DeletedBrandDto result = await Mediator.Send(deleteBrandCommand);
             return NoContent();
         }
     }

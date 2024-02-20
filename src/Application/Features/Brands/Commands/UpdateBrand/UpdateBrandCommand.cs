@@ -15,14 +15,14 @@ public class UpdateBrandCommand : IRequest<UpdatedBrandDto>
 
 public class UpdateBrandCommandHandler : IRequestHandler<UpdateBrandCommand, UpdatedBrandDto>
 {
-    private readonly IMapper _mapper;
     private readonly IBrandRepository _brandRepository;
+    private readonly IMapper _mapper;
     private readonly BrandBusinessRules _brandBusinessRules;
 
     public UpdateBrandCommandHandler(IMapper mapper, IBrandRepository brandRepository, BrandBusinessRules brandBusinessRules)
     {
-        _mapper = mapper;
         _brandRepository = brandRepository;
+        _mapper = mapper;
         _brandBusinessRules = brandBusinessRules;
     }
 
@@ -31,7 +31,7 @@ public class UpdateBrandCommandHandler : IRequestHandler<UpdateBrandCommand, Upd
 
         Brand? brand = await _brandRepository.GetAsync(b => b.Id == request.Id);
 
-        await _brandBusinessRules.BrandNameCanNotBeDuplicatedWhenUpdated(request.Id,request.Name);
+        await _brandBusinessRules.BrandNameCanNotBeDuplicatedWhenUpdated(request.Id, request.Name);
 
         Brand mappedBrand = _mapper.Map<Brand>(request);
         Brand updatedBrand = await _brandRepository.UpdateAsync(mappedBrand);

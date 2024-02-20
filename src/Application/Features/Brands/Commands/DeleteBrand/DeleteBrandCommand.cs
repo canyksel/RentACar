@@ -1,4 +1,8 @@
 ﻿using Application.Features.Brands.Dtos.Brands;
+using Application.Features.Brands.Rules.Brands;
+using Application.Services.Repositories;
+using AutoMapper;
+using Domain.Entities;
 using MediatR;
 
 namespace Application.Features.Brands.Commands.DeleteBrand;
@@ -6,14 +10,29 @@ namespace Application.Features.Brands.Commands.DeleteBrand;
 public class DeleteBrandCommand : IRequest<DeletedBrandDto>
 {
     public int Id { get; set; }
-    public bool? IsMultiple { get; set; }
-    public int[]? Ids { get; set; }
 }
 
 public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand, DeletedBrandDto>
 {
-    public Task<DeletedBrandDto> Handle(DeleteBrandCommand request, CancellationToken cancellationToken)
+    private readonly IBrandRepository _brandRepository;
+    private readonly IMapper _mapper;
+    private readonly BrandBusinessRules _brandBusinessRules;
+
+    public DeleteBrandCommandHandler(IBrandRepository brandRepository, IMapper mapper, BrandBusinessRules brandBusinessRules)
     {
-        throw new NotImplementedException();
+        _brandRepository = brandRepository;
+        _mapper = mapper;
+        _brandBusinessRules = brandBusinessRules;
+    }
+
+    public async Task<DeletedBrandDto> Handle(DeleteBrandCommand request, CancellationToken cancellationToken)
+    {
+
+        Brand? brand = await _brandRepository.GetAsync(b => b.Id == request.Id);
+        _brandBusinessRules.BrandShouldExistsWhenRequested(brand);
+        Brand mappedBrand = _mapper.Map<Brand>(request);
+        Brand deletedBrand = await _brandRepository.DeleteAsync(mappedBrand);
+        DeletedBrandDto deletedBrandDto = _mapper.Map<DeletedBrandDto>(deletedBrand);
+        return deletedBrandDto;
     }
 }
