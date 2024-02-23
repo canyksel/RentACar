@@ -5,7 +5,6 @@ using Microsoft.Extensions.DependencyInjection;
 using Persistence.Contexts;
 using Persistence.Repositories;
 
-
 namespace Persistence.Extensions
 {
     public static class PersisenceServiceRegistration
@@ -17,6 +16,7 @@ namespace Persistence.Extensions
                                                     options.UseSqlServer(
                                                         configuration.GetConnectionString("RentACarCampConnectionString")));
             services.AddScoped<IBrandRepository, BrandRepository>();
+            services.AddScoped<IModelRepository, ModelRepository>();
 
             return services;
         }
