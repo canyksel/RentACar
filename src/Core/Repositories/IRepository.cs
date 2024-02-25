@@ -6,7 +6,9 @@ namespace Core.Repositories;
 
 public interface IRepository<T> : IQuery<T> where T : Entity
 {
-    T Get(Expression<Func<T, bool>> predicate);
+    T Get(Expression<Func<T, bool>>? predicate = null,
+          Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+          bool enableTracking = false);
 
     IPaginate<T> GetList(Expression<Func<T, bool>>? predicate = null,
                          Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,

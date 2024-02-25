@@ -14,6 +14,10 @@ public class MappingProfiles : Profile
             .ForMember(dest => dest.BrandName, src => src.MapFrom(c => c.Brand.Name))
             .ReverseMap();
         CreateMap<IPaginate<Model>, ModelListModel>().ReverseMap();
-       
+
+        CreateMap<Model, ModelGetByIdDto>()
+            .ForMember(dest => dest.BrandName, src => src.MapFrom(c => c.Brand.Name))
+            .ReverseMap();
+
     }
 }

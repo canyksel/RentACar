@@ -1,4 +1,6 @@
-﻿using Application.Features.Models.Models;
+﻿using Application.Features.Models.Dtos;
+using Application.Features.Models.Models;
+using Application.Features.Models.Queries.GetByIdModel;
 using Application.Features.Models.Queries.GetListModel;
 using Application.Features.Models.Queries.GetListModelByDynamic;
 using Application.Requests;
@@ -18,6 +20,13 @@ namespace WebAPI.Controllers
             GetListModelQuery getListModelQuery = new() { PageRequest = pageRequest };
             ModelListModel result = await Mediator.Send(getListModelQuery);
             return Ok(result);
+        }
+
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] GetByIdModelQuery getByIdModelQuery)
+        {
+            ModelGetByIdDto modelGetByIdDto = await Mediator.Send(getByIdModelQuery);
+            return Ok(modelGetByIdDto);
         }
 
         [HttpPost("GetList/ByDynamic")]

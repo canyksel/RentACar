@@ -16,10 +16,16 @@ public abstract class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEn
         Context = context;
     }
 
-    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>> predicate, bool enableTracking = false)
+    public async Task<TEntity?> GetAsync(Expression<Func<TEntity, bool>>? predicate = null,
+                                         Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+                                         bool enableTracking = false)
     {
-        if (!enableTracking) return await Context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(predicate);
-        else return await Context.Set<TEntity>().FirstOrDefaultAsync(predicate);
+        IQueryable<TEntity> queryable = Query();
+        if (!enableTracking) queryable = queryable.AsNoTracking();
+        if (include != null) queryable = include(queryable);
+        if (predicate != null)
+            return await queryable.FirstOrDefaultAsync(predicate);
+        return await queryable.FirstOrDefaultAsync();
     }
 
     public async Task<IPaginate<TEntity>> GetListAsync(Expression<Func<TEntity, bool>>? predicate = null,
@@ -79,9 +85,16 @@ public abstract class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEn
         return entity;
     }
 
-    public TEntity? Get(Expression<Func<TEntity, bool>> predicate)
+    public TEntity? Get(Expression<Func<TEntity, bool>>? predicate = null,
+                        Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+                        bool enableTracking = false)
     {
-        return Context.Set<TEntity>().FirstOrDefault(predicate);
+        IQueryable<TEntity> queryable = Query();
+        if (!enableTracking) queryable = queryable.AsNoTracking();
+        if (include != null) queryable = include(queryable);
+        if (predicate != null)
+            return  queryable.FirstOrDefault(predicate);
+        return  queryable.FirstOrDefault();
     }
 
     public IPaginate<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null,

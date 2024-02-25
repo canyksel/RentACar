@@ -6,7 +6,9 @@ namespace Core.Repositories;
 
 public interface IAsyncRepository<T> where T : Entity
 {
-    Task<T?> GetAsync(Expression<Func<T, bool>> predicate, bool enableTracking = false);
+    Task<T?> GetAsync(Expression<Func<T, bool>>? predicate = null,
+                      Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,
+                      bool enableTracking = false);
 
     Task<IPaginate<T>> GetListAsync(Expression<Func<T, bool>>? predicate = null,
                                     Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
