@@ -1,4 +1,4 @@
-﻿using Application.Features.Brands.Dtos.Brands;
+﻿using Application.Features.Brands.Dtos;
 using Core.Paging;
 
 namespace Application.Features.Brands.Models;

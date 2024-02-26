@@ -1,4 +1,4 @@
-﻿namespace Application.Features.Brands.Dtos.Brands;
+﻿namespace Application.Features.Brands.Dtos;
 
 public class DeletedBrandDto
 {

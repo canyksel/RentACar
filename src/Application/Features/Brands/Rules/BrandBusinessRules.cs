@@ -3,7 +3,7 @@ using Core.CrossCuttingConcerns.Exceptions;
 using Core.Paging;
 using Domain.Entities;
 
-namespace Application.Features.Brands.Rules.Brands;
+namespace Application.Features.Brands.Rules;
 
 public class BrandBusinessRules
 {

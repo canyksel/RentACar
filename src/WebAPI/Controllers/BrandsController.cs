@@ -1,7 +1,7 @@
 ﻿using Application.Features.Brands.Commands.CreateBrand;
 using Application.Features.Brands.Commands.DeleteBrand;
 using Application.Features.Brands.Commands.UpdateBrand;
-using Application.Features.Brands.Dtos.Brands;
+using Application.Features.Brands.Dtos;
 using Application.Features.Brands.Models;
 using Application.Features.Brands.Queries.GetByIdBrand;
 using Application.Features.Brands.Queries.GetListBrand;

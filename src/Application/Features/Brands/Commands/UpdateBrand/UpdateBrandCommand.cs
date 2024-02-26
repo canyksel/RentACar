@@ -1,5 +1,5 @@
-﻿using Application.Features.Brands.Dtos.Brands;
-using Application.Features.Brands.Rules.Brands;
+﻿using Application.Features.Brands.Dtos;
+using Application.Features.Brands.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
