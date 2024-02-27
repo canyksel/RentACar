@@ -33,6 +33,7 @@ public class DeleteBrandCommandHandler : IRequestHandler<DeleteBrandCommand, Del
         Brand mappedBrand = _mapper.Map<Brand>(request);
         Brand deletedBrand = await _brandRepository.DeleteAsync(mappedBrand);
         DeletedBrandDto deletedBrandDto = _mapper.Map<DeletedBrandDto>(deletedBrand);
+
         return deletedBrandDto;
     }
 }

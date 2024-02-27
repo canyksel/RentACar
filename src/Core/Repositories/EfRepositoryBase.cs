@@ -93,8 +93,8 @@ public abstract class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEn
         if (!enableTracking) queryable = queryable.AsNoTracking();
         if (include != null) queryable = include(queryable);
         if (predicate != null)
-            return  queryable.FirstOrDefault(predicate);
-        return  queryable.FirstOrDefault();
+            return queryable.FirstOrDefault(predicate);
+        return queryable.FirstOrDefault();
     }
 
     public IPaginate<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null,

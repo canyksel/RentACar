@@ -1,6 +1,6 @@
 ﻿namespace Application.Features.Models.Dtos;
 
-public class CreatedModelDto
+public class UpdatedModelDto
 {
     public int Id { get; set; }
     public int BrandId { get; set; }

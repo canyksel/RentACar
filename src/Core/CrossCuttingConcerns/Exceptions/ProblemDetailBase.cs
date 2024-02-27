@@ -7,5 +7,5 @@ public class ProblemDetailBase
     public string? Title { get; set; }
     public string? Detail { get; set; }
     public string? Instance { get; set; }
-    public IDictionary<string,object?> Extensions { get; set; }
+    public IDictionary<string, object?> Extensions { get; set; }
 }

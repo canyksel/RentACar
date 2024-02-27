@@ -33,7 +33,7 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
         {
 
-            GetListModelByDynamicQuery getListModelByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic};
+            GetListModelByDynamicQuery getListModelByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
             ModelListModel result = await Mediator.Send(getListModelByDynamicQuery);
             return Ok(result);
         }
