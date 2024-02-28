@@ -10,9 +10,7 @@ public class Model : Entity
     public string ImageUrl { get; set; }
     public virtual Brand? Brand { get; set; }
 
-    public Model()
-    {
-    }
+    public Model() { }
 
     public Model(int id, int brandId, string name, decimal dailyPrice, string ımageUrl) : this()
     {
