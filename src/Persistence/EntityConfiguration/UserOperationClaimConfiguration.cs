@@ -8,7 +8,7 @@ namespace Persistence.EntityConfiguration
     {
         public void Configure(EntityTypeBuilder<UserOperationClaim> builder)
         {
-            builder.ToTable("UserOperationClaims").HasKey(u  => u.Id);
+            builder.ToTable("UserOperationClaims").HasKey(u => u.Id);
             builder.Property(u => u.Id).HasColumnName("Id");
             builder.Property(u => u.UserId).HasColumnName("UserId");
             builder.Property(u => u.OperationClaimId).HasColumnName("OperationClaimId");

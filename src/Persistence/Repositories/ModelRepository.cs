@@ -9,6 +9,5 @@ public class ModelRepository : EfRepositoryBase<Model, BaseDbContext>, IModelRep
 {
     public ModelRepository(BaseDbContext context) : base(context)
     {
-
     }
 }
