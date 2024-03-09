@@ -25,7 +25,7 @@ public class GetByIdBrandQuery : IRequest<BrandGetByIdDto>
         }
 
         public async Task<BrandGetByIdDto> Handle(GetByIdBrandQuery request, CancellationToken cancellationToken)
-        {        
+        {
             Brand? brand = await _brandRepository.GetAsync(b => b.Id == request.Id);
 
             _brandBusinessRules.BrandShouldExistsWhenRequested(brand);

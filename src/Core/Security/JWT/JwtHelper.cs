@@ -8,17 +8,17 @@ using System.Security.Claims;
 using System.Security.Cryptography;
 
 namespace Core.Security.JWT;
-public class JwtHelper
+public class JwtHelper : ITokenHelper
 {
     public IConfiguration Configuration { get; }
     private readonly TokenOptions _tokenOptions;
     private DateTime _accessTokenExpiration;
 
-    public JwtHelper(IConfiguration configuration, TokenOptions tokenOptions, DateTime accessTokenExpiration)
+
+    public JwtHelper(IConfiguration configuration)
     {
         Configuration = configuration;
-        _tokenOptions = tokenOptions;
-        _accessTokenExpiration = accessTokenExpiration;
+        _tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();
     }
 
     public AccessToken CreateToken(User user, IList<OperationClaim> operationClaims)
@@ -37,7 +37,7 @@ public class JwtHelper
     {
         RefreshToken refreshToken =
             new()
-            { 
+            {
                 UserId = user.Id,
                 Token = RandomRefreshToken(),
                 Expires = DateTime.UtcNow.AddDays(7),

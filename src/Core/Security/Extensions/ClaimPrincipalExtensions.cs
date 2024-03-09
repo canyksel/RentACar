@@ -4,7 +4,7 @@ namespace Core.Security.Extensions;
 
 public static class ClaimPrincipalExtensions
 {
-    public static List<string>? Claims(this ClaimsPrincipal claimsPrincipal,string claimType)
+    public static List<string>? Claims(this ClaimsPrincipal claimsPrincipal, string claimType)
     {
         List<string>? result = claimsPrincipal?.FindAll(claimType)?.Select(x => x.Value).ToList();
         return result;
