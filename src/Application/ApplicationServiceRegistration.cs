@@ -1,6 +1,7 @@
 ﻿using Application.Features.Authentications.Rules;
 using Application.Features.Brands.Rules;
 using Application.Features.Models.Rules;
+using Application.Features.Users.Rules;
 using Application.Services.AuthService;
 using Core.Pipelines.Validation;
 using FluentValidation;
@@ -20,6 +21,7 @@ namespace Application
             services.AddScoped<BrandBusinessRules>();
             services.AddScoped<ModelBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
+            services.AddScoped<UserBusinessRoles>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
