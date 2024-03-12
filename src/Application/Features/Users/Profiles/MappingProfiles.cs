@@ -14,12 +14,15 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<User, CreatedUserDto>().ReverseMap();
-        CreateMap<User,CreateUserCommand>().ReverseMap();
+        CreateMap<User, CreateUserCommand>().ReverseMap();
         CreateMap<User, UpdatedUserDto>().ReverseMap();
         CreateMap<User, UpdateUserCommand>().ReverseMap();
-        CreateMap<User,DeletedUserDto>().ReverseMap();
-        CreateMap<User,DeleteUserCommand>().ReverseMap();
-        
+        CreateMap<User, DeletedUserDto>().ReverseMap();
+        CreateMap<User, DeleteUserCommand>().ReverseMap();
+
+        CreateMap<User, UserListDto>().ReverseMap();
         CreateMap<IPaginate<User>, UserListModel>().ReverseMap();
+
+        CreateMap<User, UserGetByIdDto>().ReverseMap();
     }
 }

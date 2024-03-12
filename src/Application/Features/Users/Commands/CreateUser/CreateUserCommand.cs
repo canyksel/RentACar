@@ -18,10 +18,10 @@ public class CreateUserCommand : IRequest<CreatedUserDto>
     public class CreateUserCommandHandler : IRequestHandler<CreateUserCommand, CreatedUserDto>
     {
         private readonly IUserRepository _userRepository;
-        private readonly UserBusinessRoles _userBusinessRoles;
+        private readonly UserBusinessRules _userBusinessRoles;
         private readonly IMapper _mapper;
 
-        public CreateUserCommandHandler(IUserRepository userRepository, UserBusinessRoles userBusinessRoles, IMapper mapper)
+        public CreateUserCommandHandler(IUserRepository userRepository, UserBusinessRules userBusinessRoles, IMapper mapper)
         {
             _userRepository = userRepository;
             _userBusinessRoles = userBusinessRoles;

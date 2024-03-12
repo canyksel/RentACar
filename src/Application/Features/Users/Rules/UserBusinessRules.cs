@@ -4,11 +4,11 @@ using Core.Security.Entities;
 
 namespace Application.Features.Users.Rules;
 
-public class UserBusinessRoles
+public class UserBusinessRules
 {
     private readonly IUserRepository _userRepository;
 
-    public UserBusinessRoles(IUserRepository userRepository)
+    public UserBusinessRules(IUserRepository userRepository)
     {
         _userRepository = userRepository;
     }
@@ -19,7 +19,7 @@ public class UserBusinessRoles
         if (user is not null) throw new BusinessException("User email already exists.");
     }
 
-    public async Task UserShouldExistsWhenRequested(User user)
+    public void UserShouldExistsWhenRequested(User user)
     {
         if (user is null) throw new BusinessException("User does not exists.");
     }

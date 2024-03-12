@@ -19,10 +19,10 @@ public class UpdateUserCommand : IRequest<UpdatedUserDto>
     public class UpdateUserCommandHandler : IRequestHandler<UpdateUserCommand, UpdatedUserDto>
     {
         private readonly IUserRepository _userRepository;
-        private readonly UserBusinessRoles _userBusinessRoles;
+        private readonly UserBusinessRules _userBusinessRoles;
         private readonly IMapper _mapper;
 
-        public UpdateUserCommandHandler(IUserRepository userRepository, UserBusinessRoles userBusinessRoles, IMapper mapper)
+        public UpdateUserCommandHandler(IUserRepository userRepository, UserBusinessRules userBusinessRoles, IMapper mapper)
         {
             _userRepository = userRepository;
             _userBusinessRoles = userBusinessRoles;
@@ -31,9 +31,9 @@ public class UpdateUserCommand : IRequest<UpdatedUserDto>
 
         public async Task<UpdatedUserDto> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
         {
-            User? user = await _userRepository.GetAsync(u =>  u.Id == request.Id && u.Email == request.Email);
+            User? user = await _userRepository.GetAsync(u => u.Id == request.Id && u.Email == request.Email);
 
-            await _userBusinessRoles.UserShouldExistsWhenRequested(user);
+            _userBusinessRoles.UserShouldExistsWhenRequested(user);
 
             User? mappedUser = _mapper.Map<User>(request);
             User? updatedUser = await _userRepository.UpdateAsync(mappedUser);

@@ -14,10 +14,10 @@ public class DeleteUserCommand : IRequest<DeletedUserDto>
     public class DeleteUserCommandHandler : IRequestHandler<DeleteUserCommand, DeletedUserDto>
     {
         private readonly IUserRepository _userRepository;
-        private readonly UserBusinessRoles _userBusinessRoles;
+        private readonly UserBusinessRules _userBusinessRoles;
         private readonly IMapper _mapper;
 
-        public DeleteUserCommandHandler(IUserRepository userRepository, UserBusinessRoles userBusinessRoles, IMapper mapper)
+        public DeleteUserCommandHandler(IUserRepository userRepository, UserBusinessRules userBusinessRoles, IMapper mapper)
         {
             _userRepository = userRepository;
             _userBusinessRoles = userBusinessRoles;
@@ -27,8 +27,8 @@ public class DeleteUserCommand : IRequest<DeletedUserDto>
         public async Task<DeletedUserDto> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
         {
             User? user = await _userRepository.GetAsync(u => u.Id == request.Id);
-            
-            await _userBusinessRoles.UserShouldExistsWhenRequested(user);
+
+            _userBusinessRoles.UserShouldExistsWhenRequested(user);
 
             User? mappedUser = _mapper.Map<User>(request);
             User? deletedUser = await _userRepository.DeleteAsync(mappedUser);
