@@ -5,7 +5,6 @@ namespace Domain.Entities;
 
 public class Car : Entity
 {
-    public int BrandId { get; set; }
     public int ModelId { get; set; }
     public CarState CarState { get; set; }
     public int Kilometer { get; set; }
@@ -19,10 +18,9 @@ public class Car : Entity
     {
         
     }
-    public Car(int id, int brandId, int modelId, CarState carState, int kilometer, short modelYear, string plate): this()
+    public Car(int id, int modelId, CarState carState, int kilometer, short modelYear, string plate): this()
     {
         Id = id;
-        BrandId = brandId;
         ModelId = modelId;
         CarState = carState;
         Kilometer = kilometer;

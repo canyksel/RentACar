@@ -1,5 +1,6 @@
 ﻿using Application.Features.Authentications.Rules;
 using Application.Features.Brands.Rules;
+using Application.Features.Cars.Rules;
 using Application.Features.Models.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.AuthService;
@@ -22,6 +23,7 @@ namespace Application
             services.AddScoped<ModelBusinessRules>();
             services.AddScoped<AuthBusinessRules>();
             services.AddScoped<UserBusinessRules>();
+            services.AddScoped<CarBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));

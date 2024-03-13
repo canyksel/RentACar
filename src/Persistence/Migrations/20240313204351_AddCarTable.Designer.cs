@@ -12,7 +12,7 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240313063149_AddCarTable")]
+    [Migration("20240313204351_AddCarTable")]
     partial class AddCarTable
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -220,9 +220,8 @@ namespace Persistence.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int")
-                        .HasColumnName("BrandId");
+                    b.Property<int?>("BrandId")
+                        .HasColumnType("int");
 
                     b.Property<int>("CarState")
                         .HasColumnType("int")
@@ -257,7 +256,6 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 1,
-                            BrandId = 1,
                             CarState = 1,
                             Kilometer = 4000,
                             ModelId = 1,
@@ -267,7 +265,6 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 2,
-                            BrandId = 1,
                             CarState = 3,
                             Kilometer = 9000,
                             ModelId = 1,
@@ -277,7 +274,6 @@ namespace Persistence.Migrations
                         new
                         {
                             Id = 3,
-                            BrandId = 2,
                             CarState = 2,
                             Kilometer = 4500,
                             ModelId = 2,
@@ -380,12 +376,10 @@ namespace Persistence.Migrations
                 {
                     b.HasOne("Domain.Entities.Brand", "Brand")
                         .WithMany()
-                        .HasForeignKey("BrandId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("BrandId");
 
                     b.HasOne("Domain.Entities.Model", "Model")
-                        .WithMany()
+                        .WithMany("Cars")
                         .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -414,6 +408,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Models");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Model", b =>
+                {
+                    b.Navigation("Cars");
                 });
 #pragma warning restore 612, 618
         }

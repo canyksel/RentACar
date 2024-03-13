@@ -14,11 +14,11 @@ namespace WebAPI.Controllers
     [ApiController]
     public class BrandsController : BaseController
     {
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreateBrandCommand createBrandCommand)
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] GetByIdBrandQuery getByIdBrandQuery)
         {
-            CreatedBrandDto result = await Mediator.Send(createBrandCommand);
-            return Created("", result);
+            BrandGetByIdDto brandGetByIdDto = await Mediator.Send(getByIdBrandQuery);
+            return Ok(brandGetByIdDto);
         }
 
         [HttpGet]
@@ -29,11 +29,11 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetById([FromRoute] GetByIdBrandQuery getByIdBrandQuery)
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] CreateBrandCommand createBrandCommand)
         {
-            BrandGetByIdDto brandGetByIdDto = await Mediator.Send(getByIdBrandQuery);
-            return Ok(brandGetByIdDto);
+            CreatedBrandDto result = await Mediator.Send(createBrandCommand);
+            return Created("", result);
         }
 
         [HttpPut]

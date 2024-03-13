@@ -42,12 +42,12 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    BrandId = table.Column<int>(type: "int", nullable: false),
                     ModelId = table.Column<int>(type: "int", nullable: false),
                     CarState = table.Column<int>(type: "int", nullable: false),
                     Kilometer = table.Column<int>(type: "int", nullable: false),
                     ModelYear = table.Column<short>(type: "smallint", nullable: false),
-                    Plate = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Plate = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    BrandId = table.Column<int>(type: "int", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -56,8 +56,7 @@ namespace Persistence.Migrations
                         name: "FK_Cars_Brands_BrandId",
                         column: x => x.BrandId,
                         principalTable: "Brands",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_Cars_Models_ModelId",
                         column: x => x.ModelId,
@@ -69,17 +68,17 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Cars",
                 columns: new[] { "Id", "BrandId", "CarState", "Kilometer", "ModelId", "ModelYear", "Plate" },
-                values: new object[] { 1, 1, 1, 4000, 1, (short)2021, "34TEST34" });
+                values: new object[] { 1, null, 1, 4000, 1, (short)2021, "34TEST34" });
 
             migrationBuilder.InsertData(
                 table: "Cars",
                 columns: new[] { "Id", "BrandId", "CarState", "Kilometer", "ModelId", "ModelYear", "Plate" },
-                values: new object[] { 2, 1, 3, 9000, 1, (short)2019, "34TEST35" });
+                values: new object[] { 2, null, 3, 9000, 1, (short)2019, "34TEST35" });
 
             migrationBuilder.InsertData(
                 table: "Cars",
                 columns: new[] { "Id", "BrandId", "CarState", "Kilometer", "ModelId", "ModelYear", "Plate" },
-                values: new object[] { 3, 2, 2, 4500, 2, (short)2020, "34TEST35" });
+                values: new object[] { 3, null, 2, 4500, 2, (short)2020, "34TEST35" });
 
             migrationBuilder.CreateIndex(
                 name: "UK_Users_Email",

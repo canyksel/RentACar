@@ -9,11 +9,13 @@ public class Model : Entity
     public decimal DailyPrice { get; set; }
     public string ImageUrl { get; set; }
     public virtual Brand? Brand { get; set; }
+    public virtual ICollection<Car> Cars { get; set; }
 
     public Model()
     {
         Name = string.Empty;
         ImageUrl = string.Empty;
+        Cars = new HashSet<Car>();
     }
 
     public Model(int id, int brandId, string name, decimal dailyPrice, string ımageUrl) : this()

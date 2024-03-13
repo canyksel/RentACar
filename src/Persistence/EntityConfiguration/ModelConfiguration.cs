@@ -16,6 +16,7 @@ public class ModelConfiguration : IEntityTypeConfiguration<Model>
         builder.Property(m => m.ImageUrl).HasColumnName("ImageUrl");
         //Modelin bir adet markası var.
         builder.HasOne(m => m.Brand);
+        builder.HasMany(m => m.Cars);
 
         Model[] modelEntitySeeds = {
             new(1, 1, "Series 4", 1500, ""),
