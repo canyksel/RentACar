@@ -17,9 +17,11 @@ public class ModelConfiguration : IEntityTypeConfiguration<Model>
         //Modelin bir adet markası var.
         builder.HasOne(m => m.Brand);
 
-        Model[] modelEntitySeeds = { new(1, 1, "Series 4", 1500, ""),
+        Model[] modelEntitySeeds = {
+            new(1, 1, "Series 4", 1500, ""),
             new(2,1,"Series 3",1250,""),
-            new(3,2,"A180",1100,"") };
+            new(3,2,"A180",1100,"")
+        };
         builder.HasData(modelEntitySeeds);
     }
 }

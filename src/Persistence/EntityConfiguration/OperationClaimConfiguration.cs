@@ -11,6 +11,7 @@ namespace Persistence.EntityConfiguration
             builder.ToTable("OperationClaims").HasKey(o => o.Id);
             builder.Property(o => o.Id).HasColumnName("Id");
             builder.Property(o => o.Name).HasColumnName("Name");
+            builder.HasIndex(indexExpression: o => o.Name, name: "UK_OperationClaims_Name").IsUnique();
         }
     }
 }
