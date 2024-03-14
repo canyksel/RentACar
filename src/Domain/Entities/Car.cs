@@ -16,9 +16,9 @@ public class Car : Entity
 
     public Car()
     {
-        
+
     }
-    public Car(int id, int modelId, CarState carState, int kilometer, short modelYear, string plate): this()
+    public Car(int id, int modelId, CarState carState, int kilometer, short modelYear, string plate) : this()
     {
         Id = id;
         ModelId = modelId;

@@ -14,7 +14,7 @@ namespace WebAPI.Controllers
         public async Task<IActionResult> Add([FromBody] CreateCarCommand createCarCommand)
         {
             CreatedCarDto result = await Mediator.Send(createCarCommand);
-            return Created("",result);
+            return Created("", result);
         }
 
         [HttpPut]

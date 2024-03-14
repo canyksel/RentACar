@@ -1,4 +1,7 @@
-﻿using Application.Features.Models.Dtos;
+﻿using Application.Features.Models.Commands.CreateModel;
+using Application.Features.Models.Commands.DeleteModel;
+using Application.Features.Models.Commands.UpdateModel;
+using Application.Features.Models.Dtos;
 using Application.Features.Models.Models;
 using Application.Features.Models.Queries.GetByIdModel;
 using Application.Features.Models.Queries.GetListModel;
@@ -13,6 +16,13 @@ namespace WebAPI.Controllers
     [ApiController]
     public class ModelsController : BaseController
     {
+        [HttpGet("{Id}")]
+        public async Task<IActionResult> GetById([FromRoute] GetByIdModelQuery getByIdModelQuery)
+        {
+            ModelGetByIdDto modelGetByIdDto = await Mediator.Send(getByIdModelQuery);
+            return Ok(modelGetByIdDto);
+        }
+
         [HttpGet]
         public async Task<IActionResult> GetList([FromQuery] PageRequest pageRequest)
         {
@@ -22,19 +32,33 @@ namespace WebAPI.Controllers
             return Ok(result);
         }
 
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetById([FromRoute] GetByIdModelQuery getByIdModelQuery)
-        {
-            ModelGetByIdDto modelGetByIdDto = await Mediator.Send(getByIdModelQuery);
-            return Ok(modelGetByIdDto);
-        }
-
         [HttpPost("GetList/ByDynamic")]
         public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
         {
 
             GetListModelByDynamicQuery getListModelByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
             ModelListModel result = await Mediator.Send(getListModelByDynamicQuery);
+            return Ok(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add([FromBody] CreateModelCommand createModelCommand)
+        {
+            CreatedModelDto result = await Mediator.Send(createModelCommand);
+            return Created(uri: "", result);
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> Update([FromBody] UpdateModelCommand updateModelCommand)
+        {
+            UpdatedModelDto result = await Mediator.Send(updateModelCommand);
+            return Ok(result);
+        }
+
+        [HttpDelete]
+        public async Task<IActionResult> Delete([FromBody] DeleteModelCommand deleteModelCommand)
+        {
+            DeletedModelDto result = await Mediator.Send(deleteModelCommand);
             return Ok(result);
         }
     }

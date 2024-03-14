@@ -6,6 +6,6 @@ public class DeleteCarCommandValidator : AbstractValidator<DeleteCarCommand>
 {
     public DeleteCarCommandValidator()
     {
-        RuleFor(c=> c.Id).NotEmpty();
+        RuleFor(c => c.Id).NotEmpty();
     }
 }

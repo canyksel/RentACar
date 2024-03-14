@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Cars.Commands.UpdateCar
 {
@@ -11,7 +6,7 @@ namespace Application.Features.Cars.Commands.UpdateCar
     {
         public UpdateCarCommandValidator()
         {
-            RuleFor(c=>c.Id).NotEmpty();
+            RuleFor(c => c.Id).NotEmpty();
             RuleFor(c => c.ModelId).NotEmpty();
             RuleFor(c => c.CarState).NotEmpty();
             RuleFor(c => c.Kilometer).NotEmpty();

@@ -19,18 +19,26 @@ public class UpdateCarCommand : IRequest<UpdatedCarDto>
 
     public class UpdateCarCommandHandler : IRequestHandler<UpdateCarCommand, UpdatedCarDto>
     {
-        private ICarRepository CarRepository { get; }
-        private IMapper Mapper { get; }
-        private CarBusinessRules CarBusinessRules { get; }
+        private readonly ICarRepository _carRepository;
+        private readonly IMapper _mapper;
+        private readonly CarBusinessRules _carBusinessRules;
+
+        public UpdateCarCommandHandler(ICarRepository carRepository, IMapper mapper, CarBusinessRules carBusinessRules)
+        {
+            _carRepository = carRepository;
+            _mapper = mapper;
+            _carBusinessRules = carBusinessRules;
+        }
+
         public async Task<UpdatedCarDto> Handle(UpdateCarCommand request, CancellationToken cancellationToken)
         {
-            Car? car = await CarRepository.GetAsync(c => c.Id == request.Id);
+            Car? car = await _carRepository.GetAsync(c => c.Id == request.Id);
 
-            CarBusinessRules.CarShouldExistsWhenRequested(car);
+            _carBusinessRules.CarShouldExistsWhenRequested(car);
 
-            Car mappedCar = Mapper.Map<Car>(request);
-            Car updatedCar = await CarRepository.UpdateAsync(mappedCar);
-            UpdatedCarDto updatedCarDto = Mapper.Map<UpdatedCarDto>(updatedCar);
+            Car mappedCar = _mapper.Map<Car>(request);
+            Car updatedCar = await _carRepository.UpdateAsync(mappedCar);
+            UpdatedCarDto updatedCarDto = _mapper.Map<UpdatedCarDto>(updatedCar);
 
             return updatedCarDto;
 

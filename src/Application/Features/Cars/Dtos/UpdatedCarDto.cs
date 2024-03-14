@@ -1,9 +1,8 @@
-﻿using Core.Security.Dtos;
-using Domain.Enums;
+﻿using Domain.Enums;
 
 namespace Application.Features.Cars.Dtos
 {
-    public class UpdatedCarDto : IDto
+    public class UpdatedCarDto
     {
         public int Id { get; set; }
         public int ModelId { get; set; }

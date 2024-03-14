@@ -12,7 +12,7 @@ public class MappingProfiles : Profile
     public MappingProfiles()
     {
         CreateMap<Car, CreatedCarDto>().ReverseMap();
-        CreateMap<Car,CreateCarCommand>().ReverseMap();
+        CreateMap<Car, CreateCarCommand>().ReverseMap();
         CreateMap<Car, UpdatedCarDto>().ReverseMap();
         CreateMap<Car, UpdateCarCommand>().ReverseMap();
         CreateMap<Car, DeletedCarDto>().ReverseMap();
