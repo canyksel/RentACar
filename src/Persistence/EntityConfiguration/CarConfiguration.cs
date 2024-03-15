@@ -16,7 +16,6 @@ namespace Persistence.EntityConfiguration
             builder.Property(c => c.Kilometer).HasColumnName("Kilometer");
             builder.Property(c => c.ModelYear).HasColumnName("ModelYear");
             builder.Property(c => c.Plate).HasColumnName("Plate");
-            builder.HasOne(c => c.Brand);
             builder.HasOne(c => c.Model);
 
             Car[] carEntitySeeds = {

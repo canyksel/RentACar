@@ -11,7 +11,6 @@ public class Car : Entity
     public short ModelYear { get; set; }
     public string Plate { get; set; }
 
-    public virtual Brand? Brand { get; set; }
     public virtual Model? Model { get; set; }
 
     public Car()
