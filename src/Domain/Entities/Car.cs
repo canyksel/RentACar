@@ -3,7 +3,7 @@ using Domain.Enums;
 
 namespace Domain.Entities;
 
-public class Car : Entity
+public class Car : Entity<int>
 {
     public int ModelId { get; set; }
     public CarState CarState { get; set; }

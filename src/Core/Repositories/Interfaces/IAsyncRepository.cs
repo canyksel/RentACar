@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-namespace Core.Repositories;
+namespace Core.Repositories.Interfaces;
 
-public interface IAsyncRepository<T> where T : Entity
+public interface IAsyncRepository<T> where T : IEntity
 {
     Task<T?> GetAsync(Expression<Func<T, bool>>? predicate = null,
                       Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,

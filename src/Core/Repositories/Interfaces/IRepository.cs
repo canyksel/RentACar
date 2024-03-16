@@ -2,9 +2,9 @@
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-namespace Core.Repositories;
+namespace Core.Repositories.Interfaces;
 
-public interface IRepository<T> : IQuery<T> where T : Entity
+public interface IRepository<T> : IQuery<T> where T : IEntity
 {
     T Get(Expression<Func<T, bool>>? predicate = null,
           Func<IQueryable<T>, IIncludableQueryable<T, object>>? include = null,

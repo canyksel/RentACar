@@ -1,13 +1,13 @@
 ﻿using Core.Dynamic;
 using Core.Paging;
+using Core.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Query;
 using System.Linq.Expressions;
 
-
 namespace Core.Repositories;
 
-public abstract class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IRepository<TEntity> where TEntity : Entity where TContext : DbContext
+public abstract class EfRepositoryBase<TEntity, TContext> : IAsyncRepository<TEntity>, IRepository<TEntity> where TEntity : class, IEntity where TContext : DbContext
 {
     protected TContext Context { get; }
 

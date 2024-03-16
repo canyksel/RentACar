@@ -1,5 +1,4 @@
-﻿using Application.Features.Cars.Dtos;
-using Application.Features.Cars.Models;
+﻿using Application.Features.Cars.Models;
 using Application.Requests;
 using Application.Services.Repositories;
 using AutoMapper;
@@ -8,11 +7,6 @@ using Domain.Entities;
 using Domain.Enums;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Cars.Queries.GetListCar;
 

@@ -1,4 +1,4 @@
-﻿using Core.Repositories;
+﻿using Core.Repositories.Interfaces;
 using Core.Security.Entities;
 
 namespace Application.Services.Repositories;

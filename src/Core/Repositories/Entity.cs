@@ -1,15 +1,17 @@
-﻿namespace Core.Repositories;
+﻿using Core.Repositories.Interfaces;
 
-public abstract class Entity
+namespace Core.Repositories;
+
+public abstract class Entity<TKey> : IEntity<TKey>
 {
-    public int Id { get; set; }
+    public virtual TKey Id { get; set; }
 
     public Entity()
     {
     }
 
-    protected Entity(int ıd) : this()
+    protected Entity(TKey id)
     {
-        Id = ıd;
+        Id = id;
     }
 }

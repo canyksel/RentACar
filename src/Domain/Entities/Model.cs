@@ -2,7 +2,7 @@
 
 namespace Domain.Entities;
 
-public class Model : Entity
+public class Model : Entity<int>
 {
     public int BrandId { get; set; }
     public string Name { get; set; }
