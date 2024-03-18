@@ -8,8 +8,8 @@ public class OperationClaim : Entity<int>
     public OperationClaim() { }
 
     public OperationClaim(int id, string name) : base(id)
-    { 
-        Id = id; 
-        Name = name; 
+    {
+        Id = id;
+        Name = name;
     }
 }
