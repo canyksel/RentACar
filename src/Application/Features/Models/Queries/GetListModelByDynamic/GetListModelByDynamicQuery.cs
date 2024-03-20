@@ -17,22 +17,23 @@ public class GetListModelByDynamicQuery : IRequest<ModelListModel>
 
     public class GetListModelByDynamicQueryHandler : IRequestHandler<GetListModelByDynamicQuery, ModelListModel>
     {
-        private readonly IMapper _mapper;
         private readonly IModelRepository _modelRepository;
+        private readonly IMapper _mapper;
 
-        public GetListModelByDynamicQueryHandler(IMapper mapper, IModelRepository modelRepository)
+        public GetListModelByDynamicQueryHandler(IModelRepository modelRepository, IMapper mapper)
         {
-            _mapper = mapper;
             _modelRepository = modelRepository;
+            _mapper = mapper;
         }
 
         public async Task<ModelListModel> Handle(GetListModelByDynamicQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Model> models = await _modelRepository.GetListByDynamicAsync(request.Dynamic, include:
-                                        m => m.Include(c => c.Brand),
-                                        index: request.PageRequest.Page,
-                                        size: request.PageRequest.PageSize
-                                        );
+            IPaginate<Model> models = await _modelRepository
+                .GetListByDynamicAsync(request.Dynamic, include:
+                                       m => m.Include(c => c.Brand),
+                                       index: request.PageRequest.Page,
+                                       size: request.PageRequest.PageSize);
+
             ModelListModel mappedModels = _mapper.Map<ModelListModel>(models);
             return mappedModels;
         }
