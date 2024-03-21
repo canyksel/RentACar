@@ -8,46 +8,45 @@ using Application.Features.Users.Queries.GetListUser;
 using Application.Requests;
 using Microsoft.AspNetCore.Mvc;
 
-namespace WebAPI.Controllers
+namespace WebAPI.Controllers;
+
+[Route("api/[controller]")]
+[ApiController]
+public class UsersController : BaseController
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class UsersController : BaseController
+    [HttpGet("{Id}")]
+    public async Task<IActionResult> GetById([FromRoute] GetByIdUserQuery getByIdUserQuery)
     {
-        [HttpGet("{Id}")]
-        public async Task<IActionResult> GetById([FromRoute] GetByIdUserQuery getByIdUserQuery)
-        {
-            UserGetByIdDto result = await Mediator.Send(getByIdUserQuery);
-            return Ok(result);
-        }
+        UserGetByIdDto result = await Mediator.Send(getByIdUserQuery);
+        return Ok(result);
+    }
 
-        [HttpGet]
-        public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
-        {
-            GetListUserQuery getListUserQuery = new() { PageRequest = pageRequest };
-            UserListModel result = await Mediator.Send(getListUserQuery);
-            return Ok(result);
-        }
+    [HttpGet]
+    public async Task<IActionResult> GetAll([FromQuery] PageRequest pageRequest)
+    {
+        GetListUserQuery getListUserQuery = new() { PageRequest = pageRequest };
+        UserListModel result = await Mediator.Send(getListUserQuery);
+        return Ok(result);
+    }
 
-        [HttpPost]
-        public async Task<IActionResult> Add([FromBody] CreateUserCommand createUserCommand)
-        {
-            CreatedUserDto result = await Mediator.Send(createUserCommand);
-            return Created("", result);
-        }
+    [HttpPost]
+    public async Task<IActionResult> Add([FromBody] CreateUserCommand createUserCommand)
+    {
+        CreatedUserDto result = await Mediator.Send(createUserCommand);
+        return Created("", result);
+    }
 
-        [HttpPut]
-        public async Task<IActionResult> Update([FromBody] UpdateUserCommand updateUserCommand)
-        {
-            UpdatedUserDto result = await Mediator.Send(updateUserCommand);
-            return NoContent();
-        }
+    [HttpPut]
+    public async Task<IActionResult> Update([FromBody] UpdateUserCommand updateUserCommand)
+    {
+        UpdatedUserDto result = await Mediator.Send(updateUserCommand);
+        return NoContent();
+    }
 
-        [HttpDelete]
-        public async Task<IActionResult> Delete([FromBody] DeleteUserCommand deleteUserCommand)
-        {
-            DeletedUserDto result = await Mediator.Send(deleteUserCommand);
-            return NoContent();
-        }
+    [HttpDelete]
+    public async Task<IActionResult> Delete([FromBody] DeleteUserCommand deleteUserCommand)
+    {
+        DeletedUserDto result = await Mediator.Send(deleteUserCommand);
+        return NoContent();
     }
 }
