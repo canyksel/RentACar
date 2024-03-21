@@ -257,30 +257,20 @@ namespace Persistence.Migrations
                             Id = 1,
                             CarState = 1,
                             ColorId = 1,
-                            Kilometer = 4000,
+                            Kilometer = 1000,
                             ModelId = 1,
-                            ModelYear = (short)2021,
-                            Plate = "34TEST34"
+                            ModelYear = (short)2018,
+                            Plate = "34ABC34"
                         },
                         new
                         {
                             Id = 2,
-                            CarState = 3,
-                            ColorId = 2,
-                            Kilometer = 9000,
-                            ModelId = 1,
-                            ModelYear = (short)2019,
-                            Plate = "34TEST35"
-                        },
-                        new
-                        {
-                            Id = 3,
                             CarState = 2,
                             ColorId = 2,
-                            Kilometer = 4500,
+                            Kilometer = 1000,
                             ModelId = 2,
-                            ModelYear = (short)2020,
-                            Plate = "34TEST35"
+                            ModelYear = (short)2018,
+                            Plate = "35ABC35"
                         });
                 });
 
@@ -288,17 +278,34 @@ namespace Persistence.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Name");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Colors");
+                    b.HasIndex(new[] { "Name" }, "UK_Colors_Name")
+                        .IsUnique();
+
+                    b.ToTable("Colors", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Red"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Name = "Blue"
+                        });
                 });
 
             modelBuilder.Entity("Domain.Entities.Model", b =>

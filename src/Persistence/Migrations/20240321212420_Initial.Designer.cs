@@ -12,8 +12,8 @@ using Persistence.Contexts;
 namespace Persistence.Migrations
 {
     [DbContext(typeof(BaseDbContext))]
-    [Migration("20240316085747_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20240321212420_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -224,6 +224,10 @@ namespace Persistence.Migrations
                         .HasColumnType("int")
                         .HasColumnName("CarState");
 
+                    b.Property<int>("ColorId")
+                        .HasColumnType("int")
+                        .HasColumnName("ColorId");
+
                     b.Property<int>("Kilometer")
                         .HasColumnType("int")
                         .HasColumnName("Kilometer");
@@ -243,6 +247,8 @@ namespace Persistence.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ColorId");
+
                     b.HasIndex("ModelId");
 
                     b.ToTable("Cars", (string)null);
@@ -252,28 +258,55 @@ namespace Persistence.Migrations
                         {
                             Id = 1,
                             CarState = 1,
-                            Kilometer = 4000,
+                            ColorId = 1,
+                            Kilometer = 1000,
                             ModelId = 1,
-                            ModelYear = (short)2021,
-                            Plate = "34TEST34"
+                            ModelYear = (short)2018,
+                            Plate = "34ABC34"
                         },
                         new
                         {
                             Id = 2,
-                            CarState = 3,
-                            Kilometer = 9000,
-                            ModelId = 1,
-                            ModelYear = (short)2019,
-                            Plate = "34TEST35"
+                            CarState = 2,
+                            ColorId = 2,
+                            Kilometer = 1000,
+                            ModelId = 2,
+                            ModelYear = (short)2018,
+                            Plate = "35ABC35"
+                        });
+                });
+
+            modelBuilder.Entity("Domain.Entities.Color", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasColumnName("Id");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)")
+                        .HasColumnName("Name");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex(new[] { "Name" }, "UK_Colors_Name")
+                        .IsUnique();
+
+                    b.ToTable("Colors", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Name = "Red"
                         },
                         new
                         {
-                            Id = 3,
-                            CarState = 2,
-                            Kilometer = 4500,
-                            ModelId = 2,
-                            ModelYear = (short)2020,
-                            Plate = "34TEST35"
+                            Id = 2,
+                            Name = "Blue"
                         });
                 });
 
@@ -369,11 +402,19 @@ namespace Persistence.Migrations
 
             modelBuilder.Entity("Domain.Entities.Car", b =>
                 {
+                    b.HasOne("Domain.Entities.Color", "Color")
+                        .WithMany("Cars")
+                        .HasForeignKey("ColorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Domain.Entities.Model", "Model")
                         .WithMany("Cars")
                         .HasForeignKey("ModelId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Color");
 
                     b.Navigation("Model");
                 });
@@ -397,6 +438,11 @@ namespace Persistence.Migrations
             modelBuilder.Entity("Domain.Entities.Brand", b =>
                 {
                     b.Navigation("Models");
+                });
+
+            modelBuilder.Entity("Domain.Entities.Color", b =>
+                {
+                    b.Navigation("Cars");
                 });
 
             modelBuilder.Entity("Domain.Entities.Model", b =>

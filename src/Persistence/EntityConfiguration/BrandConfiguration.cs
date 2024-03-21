@@ -16,8 +16,8 @@ public class BrandConfiguration : IEntityTypeConfiguration<Brand>
         builder.HasMany(p => p.Models);
 
         Brand[] brandEntitySeeds = {
-            new(1, "BMW"),
-            new(2, "Mercedes")
+            new(id:1, name: "BMW"),
+            new(id: 2, name: "Mercedes")
         };
         builder.HasData(brandEntitySeeds);
     }

@@ -19,9 +19,9 @@ public class ModelConfiguration : IEntityTypeConfiguration<Model>
         builder.HasMany(m => m.Cars);
 
         Model[] modelEntitySeeds = {
-            new(1, 1, "Series 4", 1500, ""),
-            new(2,1,"Series 3",1250,""),
-            new(3,2,"A180",1100,"")
+            new(id: 1, brandId: 1, name: "Series 4", dailyPrice: 1500, imageUrl: ""),
+            new(id: 2,brandId: 1,name: "Series 3",dailyPrice: 1250,imageUrl: ""),
+            new(id: 3,brandId: 2,name: "A180",dailyPrice: 1100,imageUrl: "")
         };
         builder.HasData(modelEntitySeeds);
     }

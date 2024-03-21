@@ -1,10 +1,11 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace Persistence.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -19,6 +20,19 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Brands", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Colors",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Colors", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -134,6 +148,7 @@ namespace Persistence.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    ColorId = table.Column<int>(type: "int", nullable: false),
                     ModelId = table.Column<int>(type: "int", nullable: false),
                     CarState = table.Column<int>(type: "int", nullable: false),
                     Kilometer = table.Column<int>(type: "int", nullable: false),
@@ -143,6 +158,12 @@ namespace Persistence.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Cars_Colors_ColorId",
+                        column: x => x.ColorId,
+                        principalTable: "Colors",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Cars_Models_ModelId",
                         column: x => x.ModelId,
@@ -154,12 +175,20 @@ namespace Persistence.Migrations
             migrationBuilder.InsertData(
                 table: "Brands",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 1, "BMW" });
+                values: new object[,]
+                {
+                    { 1, "BMW" },
+                    { 2, "Mercedes" }
+                });
 
             migrationBuilder.InsertData(
-                table: "Brands",
+                table: "Colors",
                 columns: new[] { "Id", "Name" },
-                values: new object[] { 2, "Mercedes" });
+                values: new object[,]
+                {
+                    { 1, "Red" },
+                    { 2, "Blue" }
+                });
 
             migrationBuilder.InsertData(
                 table: "Models",
@@ -178,18 +207,13 @@ namespace Persistence.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "Id", "CarState", "Kilometer", "ModelId", "ModelYear", "Plate" },
-                values: new object[] { 1, 1, 4000, 1, (short)2021, "34TEST34" });
+                columns: new[] { "Id", "CarState", "ColorId", "Kilometer", "ModelId", "ModelYear", "Plate" },
+                values: new object[] { 1, 1, 1, 1000, 1, (short)2018, "34ABC34" });
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "Id", "CarState", "Kilometer", "ModelId", "ModelYear", "Plate" },
-                values: new object[] { 2, 3, 9000, 1, (short)2019, "34TEST35" });
-
-            migrationBuilder.InsertData(
-                table: "Cars",
-                columns: new[] { "Id", "CarState", "Kilometer", "ModelId", "ModelYear", "Plate" },
-                values: new object[] { 3, 2, 4500, 2, (short)2020, "34TEST35" });
+                columns: new[] { "Id", "CarState", "ColorId", "Kilometer", "ModelId", "ModelYear", "Plate" },
+                values: new object[] { 2, 2, 2, 1000, 2, (short)2018, "35ABC35" });
 
             migrationBuilder.CreateIndex(
                 name: "UK_Brands_Name",
@@ -198,9 +222,20 @@ namespace Persistence.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_Cars_ColorId",
+                table: "Cars",
+                column: "ColorId");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Cars_ModelId",
                 table: "Cars",
                 column: "ModelId");
+
+            migrationBuilder.CreateIndex(
+                name: "UK_Colors_Name",
+                table: "Colors",
+                column: "Name",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "IX_Models_BrandId",
@@ -246,6 +281,9 @@ namespace Persistence.Migrations
 
             migrationBuilder.DropTable(
                 name: "UserOperationClaims");
+
+            migrationBuilder.DropTable(
+                name: "Colors");
 
             migrationBuilder.DropTable(
                 name: "Models");

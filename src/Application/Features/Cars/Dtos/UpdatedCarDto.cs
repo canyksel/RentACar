@@ -5,6 +5,7 @@ namespace Application.Features.Cars.Dtos
     public class UpdatedCarDto
     {
         public int Id { get; set; }
+        public int ColorId { get; set; }
         public int ModelId { get; set; }
         public CarState CarState { get; set; }
         public int Kilometer { get; set; }

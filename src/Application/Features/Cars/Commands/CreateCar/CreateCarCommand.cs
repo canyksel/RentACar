@@ -9,6 +9,7 @@ namespace Application.Features.Cars.Commands.CreateCar;
 
 public class CreateCarCommand : IRequest<CreatedCarDto>
 {
+    public int ColorId { get; set; }
     public int ModelId { get; set; }
     public CarState CarState { get; set; }
     public int Kilometer { get; set; }

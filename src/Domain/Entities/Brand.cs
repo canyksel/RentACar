@@ -10,6 +10,7 @@ public class Brand : Entity<int>
     public Brand()
     {
         Name = string.Empty;
+        Models = new HashSet<Model>();
     }
 
     public Brand(int id, string name) : this()
