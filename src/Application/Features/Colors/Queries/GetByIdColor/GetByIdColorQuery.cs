@@ -26,7 +26,7 @@ public class GetByIdColorQuery : IRequest<ColorGetByIdDto>
 
         public async Task<ColorGetByIdDto> Handle(GetByIdColorQuery request, CancellationToken cancellationToken)
         {
-            Color? color = await _colorRepository.GetAsync(c =>c.Id == request.Id);
+            Color? color = await _colorRepository.GetAsync(c => c.Id == request.Id);
 
             _colorBusinessRules.ColorShouldExistsWhenRequested(color);
 

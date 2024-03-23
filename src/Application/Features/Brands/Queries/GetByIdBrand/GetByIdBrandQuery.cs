@@ -4,6 +4,7 @@ using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Brands.Queries.GetByIdBrand;
 
@@ -26,7 +27,8 @@ public class GetByIdBrandQuery : IRequest<BrandGetByIdDto>
 
         public async Task<BrandGetByIdDto> Handle(GetByIdBrandQuery request, CancellationToken cancellationToken)
         {
-            Brand? brand = await _brandRepository.GetAsync(b => b.Id == request.Id);
+            Brand? brand = await _brandRepository.GetAsync(b => b.Id == request.Id,
+                                                           include: b => b.Include(b => b.Models));
 
             _brandBusinessRules.BrandShouldExistsWhenRequested(brand);
 

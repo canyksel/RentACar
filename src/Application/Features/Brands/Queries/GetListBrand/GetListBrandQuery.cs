@@ -5,6 +5,7 @@ using AutoMapper;
 using Core.Paging;
 using Domain.Entities;
 using MediatR;
+using Microsoft.EntityFrameworkCore;
 
 namespace Application.Features.Brands.Queries.GetListBrand;
 
@@ -24,7 +25,10 @@ public class GetListBrandQuery : IRequest<BrandListModel>
 
         public async Task<BrandListModel> Handle(GetListBrandQuery request, CancellationToken cancellationToken)
         {
-            IPaginate<Brand> brands = await _brandRepository.GetListAsync(index: request.PageRequest.Page, size: request.PageRequest.PageSize);
+            IPaginate<Brand> brands = await _brandRepository
+                .GetListAsync(include: b => b.Include(b => b.Models),
+                              index: request.PageRequest.Page,
+                              size: request.PageRequest.PageSize);
 
             BrandListModel mappedBrandListModel = _mapper.Map<BrandListModel>(brands);
 

@@ -28,7 +28,7 @@ public class GetListCarQuery : IRequest<CarListModel>
         {
             IPaginate<Car> cars = await _carRepository.GetListAsync(
                                         predicate: c => c.CarState != CarState.Maintenance,
-                                        include: c => c.Include(c => c.Model).ThenInclude(m => m.Brand).Include(c=>c.Color),
+                                        include: c => c.Include(c => c.Model).ThenInclude(m => m.Brand).Include(c => c.Color),
                                         index: request.PageRequest.Page,
                                         size: request.PageRequest.PageSize
                                         );
