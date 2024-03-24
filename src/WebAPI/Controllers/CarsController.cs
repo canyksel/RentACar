@@ -5,7 +5,9 @@ using Application.Features.Cars.Dtos;
 using Application.Features.Cars.Models;
 using Application.Features.Cars.Queries.GetByIdCar;
 using Application.Features.Cars.Queries.GetListCar;
+using Application.Features.Cars.Queries.GetListCarByDynamic;
 using Application.Requests;
+using Core.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -26,6 +28,14 @@ public class CarsController : BaseController
     {
         GetListCarQuery getListCarQuery = new() { PageRequest = pageRequest };
         CarListModel result = await Mediator.Send(getListCarQuery);
+        return Ok(result);
+    }
+
+    [HttpGet("GetList/ByDynamic")]
+    public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
+    {
+        GetListCarByDynamicQuery getListCarByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
+        CarListModel result = await Mediator.Send(getListCarByDynamicQuery);
         return Ok(result);
     }
 

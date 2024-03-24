@@ -5,7 +5,9 @@ using Application.Features.Colors.Dtos;
 using Application.Features.Colors.Models;
 using Application.Features.Colors.Queries.GetByIdColor;
 using Application.Features.Colors.Queries.GetListColor;
+using Application.Features.Colors.Queries.GetListColorByDynamic;
 using Application.Requests;
+using Core.Dynamic;
 using Microsoft.AspNetCore.Mvc;
 
 namespace WebAPI.Controllers;
@@ -26,6 +28,13 @@ public class ColorsController : BaseController
     {
         GetListColorQuery getListColorQuery = new() { PageRequest = pageRequest };
         ColorListModel result = await Mediator.Send(getListColorQuery);
+        return Ok(result);
+    }
+    [HttpGet("GetList/ByDynamic")]
+    public async Task<IActionResult> GetListByDynamic([FromQuery] PageRequest pageRequest, [FromBody] Dynamic dynamic)
+    {
+        GetListColorByDynamicQuery getListColorByDynamicQuery = new() { PageRequest = pageRequest, Dynamic = dynamic };
+        ColorListModel result = await Mediator.Send(getListColorByDynamicQuery);
         return Ok(result);
     }
 
