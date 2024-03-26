@@ -2,10 +2,13 @@
 using Application.Features.Brands.Rules;
 using Application.Features.Cars.Rules;
 using Application.Features.Colors.Rules;
+using Application.Features.Fuels.Rules;
 using Application.Features.Models.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.AuthService;
+using Core.CrossCuttingConcerns.Rules;
 using Core.Pipelines.Validation;
+using Domain.Entities;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -26,6 +29,7 @@ namespace Application
             services.AddScoped<UserBusinessRules>();
             services.AddScoped<CarBusinessRules>();
             services.AddScoped<ColorBusinessRules>();
+            services.AddScoped<FuelBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
