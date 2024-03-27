@@ -2,11 +2,6 @@
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.Paging;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Fuels.Rules;
 
@@ -23,5 +18,9 @@ public class FuelBusinessRules
     {
         IPaginate<Fuel> result = await _fuelRepository.GetListAsync(f => f.Name == name);
         if (result.Items.Any()) throw new BusinessException("Fuel name exists.");
+    }
+    public void FuelShouldExistsWhenRequested(Fuel fuel)
+    {
+        if (fuel is null) throw new BusinessException("Fuel does not exists.");
     }
 }
