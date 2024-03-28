@@ -1,13 +1,9 @@
 ﻿using Core.Repositories.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Core.CrossCuttingConcerns.Rules;
 
 public interface IBusinessRules<T> where T : IEntity
 {
     Task IsNameExists(string name);
+    void ShouldExistsWhenRequested(T entity);
 }

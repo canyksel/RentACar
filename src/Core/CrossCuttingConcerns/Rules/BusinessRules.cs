@@ -4,17 +4,16 @@ using Core.Repositories.Interfaces;
 
 namespace Core.CrossCuttingConcerns.Rules;
 
-public abstract class BusinessRuleBase<T> : IBusinessRules<T> where T : IEntity
+public abstract class BusinessRules<T> : IBusinessRules<T> where T : IEntity
 {
     private readonly IRepository<T> _repository;
     private readonly IAsyncRepository<T> _asyncRepository;
 
-    protected BusinessRuleBase()
-    {
-        
+    protected BusinessRules()
+    {     
     }
 
-    protected BusinessRuleBase(IRepository<T> repository, IAsyncRepository<T> asyncRepository) : this()
+    protected BusinessRules(IRepository<T> repository, IAsyncRepository<T> asyncRepository) : this()
     {
         _repository = repository;
         _asyncRepository = asyncRepository;
@@ -22,7 +21,12 @@ public abstract class BusinessRuleBase<T> : IBusinessRules<T> where T : IEntity
 
     public async Task IsNameExists(string name)
     {
-        IPaginate<T> result = await _asyncRepository.GetListAsync(x => x.GetType().Name  == name);
+        IPaginate<T> result = await _asyncRepository.GetListAsync(T => T.GetType().GetProperty("Name").GetValue(T).Equals(name));
         if (result.Items.Any()) throw new BusinessException("Name exists.");
+    }
+
+    public void ShouldExistsWhenRequested(T entity)
+    {
+        if (entity is null) throw new BusinessException("Item does not exists.");
     }
 }
