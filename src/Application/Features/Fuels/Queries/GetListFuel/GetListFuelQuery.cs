@@ -1,5 +1,4 @@
-﻿using Application.Features.Fuels.Dtos;
-using Application.Features.Fuels.Models;
+﻿using Application.Features.Fuels.Models;
 using Application.Requests;
 using Application.Services.Repositories;
 using AutoMapper;

@@ -1,5 +1,6 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
 using Core.Paging;
+using Core.Repositories;
 using Core.Repositories.Interfaces;
 
 namespace Core.CrossCuttingConcerns.Rules;
@@ -10,7 +11,7 @@ public abstract class BusinessRules<T> : IBusinessRules<T> where T : IEntity
     private readonly IAsyncRepository<T> _asyncRepository;
 
     protected BusinessRules()
-    {     
+    {
     }
 
     protected BusinessRules(IRepository<T> repository, IAsyncRepository<T> asyncRepository) : this()
@@ -21,7 +22,7 @@ public abstract class BusinessRules<T> : IBusinessRules<T> where T : IEntity
 
     public async Task IsNameExists(string name)
     {
-        IPaginate<T> result = await _asyncRepository.GetListAsync(T => T.GetType().GetProperty("Name").GetValue(T).Equals(name));
+        IPaginate<T> result = await _asyncRepository.GetListAsync(predicate: x => x.GetType().GetProperty("Name").GetValue(x).Equals(name));
         if (result.Items.Any()) throw new BusinessException("Name exists.");
     }
 

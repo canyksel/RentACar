@@ -1,11 +1,12 @@
 ﻿using Application.Services.Repositories;
 using Core.CrossCuttingConcerns.Exceptions;
+using Core.CrossCuttingConcerns.Rules;
 using Core.Paging;
 using Domain.Entities;
 
 namespace Application.Features.Colors.Rules
 {
-    public class ColorBusinessRules
+    public class ColorBusinessRules : BusinessRules<Color>
     {
         private readonly IColorRepository _colorRepository;
 

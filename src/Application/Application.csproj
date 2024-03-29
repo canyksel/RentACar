@@ -11,7 +11,6 @@
     <Folder Include="Features\Cars\Constants\" />
     <Folder Include="Features\Colors\Constants\" />
     <Folder Include="Features\Fuels\Constants\" />
-    <Folder Include="Features\Fuels\Profiles\" />
     <Folder Include="Features\Models\Constants\" />
   </ItemGroup>
 

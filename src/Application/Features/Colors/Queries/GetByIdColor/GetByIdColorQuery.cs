@@ -28,7 +28,7 @@ public class GetByIdColorQuery : IRequest<ColorGetByIdDto>
         {
             Color? color = await _colorRepository.GetAsync(c => c.Id == request.Id);
 
-            _colorBusinessRules.ColorShouldExistsWhenRequested(color);
+            _colorBusinessRules.ShouldExistsWhenRequested(color);
 
             ColorGetByIdDto colorGetByIdDto = _mapper.Map<ColorGetByIdDto>(color);
             return colorGetByIdDto;

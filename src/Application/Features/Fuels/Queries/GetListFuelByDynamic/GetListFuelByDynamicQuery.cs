@@ -12,7 +12,7 @@ namespace Application.Features.Fuels.Queries.GetListFuelByDynamic;
 public class GetListFuelByDynamicQuery : IRequest<FuelListModel>
 {
     public Dynamic Dynamic { get; set; }
-    public PageRequest PageRequest{ get; set; }
+    public PageRequest PageRequest { get; set; }
 
     public class GetListFuelByDynamicQueryHandler : IRequestHandler<GetListFuelByDynamicQuery, FuelListModel>
     {

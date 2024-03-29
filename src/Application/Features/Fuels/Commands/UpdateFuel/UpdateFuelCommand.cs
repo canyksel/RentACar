@@ -7,7 +7,7 @@ using MediatR;
 
 namespace Application.Features.Fuels.Commands.UpdateFuel;
 
-public class UpdateFuelCommand :IRequest<UpdatedFuelDto>
+public class UpdateFuelCommand : IRequest<UpdatedFuelDto>
 {
     public int Id { get; set; }
     public string Name { get; set; }
