@@ -27,7 +27,7 @@ public class GetListModelQuery : IRequest<ModelListModel>
         public async Task<ModelListModel> Handle(GetListModelQuery request, CancellationToken cancellationToken)
         {
             IPaginate<Model> models = await _modelRepository.GetListAsync(include:
-                                           m => m.Include(c => c.Brand),
+                                           m => m.Include(c => c.Brand).Include(m => m.Fuel),
                                            index: request.PageRequest.Page,
                                            size: request.PageRequest.PageSize
                                            );

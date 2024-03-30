@@ -1,6 +1,5 @@
 ﻿using Core.CrossCuttingConcerns.Exceptions;
 using Core.Paging;
-using Core.Repositories;
 using Core.Repositories.Interfaces;
 
 namespace Core.CrossCuttingConcerns.Rules;

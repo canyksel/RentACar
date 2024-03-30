@@ -25,7 +25,7 @@ public class GetByIdModelQuery : IRequest<ModelGetByIdDto>
         public async Task<ModelGetByIdDto> Handle(GetByIdModelQuery request, CancellationToken cancellationToken)
         {
             Model? model = await _modelRepository.GetAsync(m => m.Id == request.Id,
-                                                           include: m => m.Include(m => m.Brand));
+                                                           include: m => m.Include(m => m.Brand).Include(m => m.Fuel));
 
             var mapped = _mapper.Map<ModelGetByIdDto>(model);
 

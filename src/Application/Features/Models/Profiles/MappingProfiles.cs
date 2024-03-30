@@ -21,12 +21,13 @@ public class MappingProfiles : Profile
         CreateMap<Model, DeleteModelCommand>().ReverseMap();
 
         CreateMap<Model, ModelListDto>()
-            .ForMember(dest => dest.BrandName, src => src.MapFrom(c => c.Brand.Name))
+            .ForMember(dest => dest.BrandName, src => src.MapFrom(m => m.Brand.Name))
+            .ForMember(dest => dest.FuelName, src => src.MapFrom(m => m.Fuel.Name))
             .ReverseMap();
         CreateMap<IPaginate<Model>, ModelListModel>().ReverseMap();
 
         CreateMap<Model, ModelGetByIdDto>()
-            .ForMember(dest => dest.BrandName, src => src.MapFrom(c => c.Brand.Name))
+            .ForMember(dest => dest.BrandName, src => src.MapFrom(m => m.Brand.Name))
             .ReverseMap();
     }
 }

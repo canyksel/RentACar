@@ -9,6 +9,7 @@ namespace Application.Features.Models.Commands.CreateModel
     public class CreateModelCommand : IRequest<CreatedModelDto>
     {
         public int BrandId { get; set; }
+        public int FuelId { get; set; }
         public string Name { get; set; }
         public decimal DailyPrice { get; set; }
         public string ImageUrl { get; set; }

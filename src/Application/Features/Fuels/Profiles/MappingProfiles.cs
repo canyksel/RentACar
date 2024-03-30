@@ -3,15 +3,9 @@ using Application.Features.Fuels.Commands.DeleteFuel;
 using Application.Features.Fuels.Commands.UpdateFuel;
 using Application.Features.Fuels.Dtos;
 using Application.Features.Fuels.Models;
-using Application.Features.Fuels.Queries.GetByIdFuel;
 using AutoMapper;
 using Core.Paging;
 using Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Fuels.Profiles;
 

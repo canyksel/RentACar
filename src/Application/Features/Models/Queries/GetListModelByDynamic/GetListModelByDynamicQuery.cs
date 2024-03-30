@@ -30,7 +30,7 @@ public class GetListModelByDynamicQuery : IRequest<ModelListModel>
         {
             IPaginate<Model> models = await _modelRepository
                 .GetListByDynamicAsync(request.Dynamic, include:
-                                       m => m.Include(c => c.Brand),
+                                       m => m.Include(m=> m.Brand).Include(m=>m.Fuel),
                                        index: request.PageRequest.Page,
                                        size: request.PageRequest.PageSize);
 
