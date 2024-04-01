@@ -15,6 +15,7 @@ public class BaseDbContext : DbContext
     public DbSet<Car> Cars { get; set; }
     public DbSet<Color> Colors { get; set; }
     public DbSet<Fuel> Fuels { get; set; }
+    public DbSet<Transmission> Transmissions { get; set; }
     public DbSet<OperationClaim> OperationClaims { get; set; }
     public DbSet<UserOperationClaim> UserOperationClaims { get; set; }
     public DbSet<RefreshToken> RefreshTokens { get; set; }
