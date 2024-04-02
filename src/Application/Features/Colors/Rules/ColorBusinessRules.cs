@@ -20,10 +20,5 @@ namespace Application.Features.Colors.Rules
             IPaginate<Color> result = await _colorRepository.GetListAsync(b => b.Name == name);
             if (result.Items.Any()) throw new BusinessException("Color name exists.");
         }
-
-        public void ColorShouldExistsWhenRequested(Color color)
-        {
-            if (color is null) throw new BusinessException("Color does not exists.");
-        }
     }
 }

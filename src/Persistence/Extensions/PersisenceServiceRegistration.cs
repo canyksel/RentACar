@@ -24,6 +24,7 @@ namespace Persistence.Extensions
             services.AddScoped<ICarRepository, CarRepository>();
             services.AddScoped<IColorRepository, ColorRepository>();
             services.AddScoped<IFuelRepository, FuelRepository>();
+            services.AddScoped<ITransmissionRepository, TransmissionRepository>();
 
             return services;
         }
