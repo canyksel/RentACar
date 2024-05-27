@@ -28,7 +28,7 @@ public class DeleteColorCommand : IRequest<DeletedColorDto>
         {
             Color? color = await _colorRepository.GetAsync(c => c.Id == request.Id);
 
-            _colorBusinessRules.ColorShouldExistsWhenRequested(color);
+            //_colorBusinessRules.ColorShouldExistsWhenRequested(color);
 
             Color mappedColor = _mapper.Map<Color>(color);
             Color deletedColor = await _colorRepository.DeleteAsync(mappedColor);

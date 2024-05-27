@@ -29,7 +29,7 @@ namespace Application.Features.Colors.Commands.UpdateColor
             {
                 Color? color = await _colorRepository.GetAsync(c => c.Id == request.Id);
 
-                _colorBusinessRules.ColorShouldExistsWhenRequested(color);
+                //_colorBusinessRules.ColorShouldExistsWhenRequested(color);
 
                 Color mappedColor = _mapper.Map<Color>(color);
                 Color updatedColor = await _colorRepository.UpdateAsync(mappedColor);

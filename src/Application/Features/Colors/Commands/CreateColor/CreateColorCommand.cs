@@ -28,7 +28,7 @@ public class CreateColorCommand : IRequest<CreatedColorDto>
         public async Task<CreatedColorDto> Handle(CreateColorCommand request, CancellationToken cancellationToken)
         {
             //Business
-            await _colorBusinessRules.IsNameExists(_mapper.Map<Color>(request), request.Name);
+            //await _colorBusinessRules.IsNameExists(_mapper.Map<Color>(request), request.Name);
 
             //Repository
             Color mappedColor = _mapper.Map<Color>(request);

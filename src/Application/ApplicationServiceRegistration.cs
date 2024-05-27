@@ -4,6 +4,7 @@ using Application.Features.Cars.Rules;
 using Application.Features.Colors.Rules;
 using Application.Features.Fuels.Rules;
 using Application.Features.Models.Rules;
+using Application.Features.Transmissions.Rules;
 using Application.Features.Users.Rules;
 using Application.Services.AuthService;
 using Core.Pipelines.Validation;
@@ -28,6 +29,7 @@ namespace Application
             services.AddScoped<CarBusinessRules>();
             services.AddScoped<ColorBusinessRules>();
             services.AddScoped<FuelBusinessRules>();
+            services.AddScoped<TransmissionBusinessRules>();
 
             services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RequestValidationBehavior<,>));
