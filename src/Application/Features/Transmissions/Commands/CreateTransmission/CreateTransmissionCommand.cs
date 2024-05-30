@@ -1,5 +1,4 @@
 ﻿using Application.Features.Transmissions.Dtos;
-using Application.Features.Transmissions.Rules;
 using Application.Services.Repositories;
 using AutoMapper;
 using Domain.Entities;

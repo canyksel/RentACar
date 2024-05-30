@@ -2,12 +2,11 @@
 using Core.CrossCuttingConcerns.Exceptions;
 using Core.CrossCuttingConcerns.Rules;
 using Core.Paging;
-using Core.Repositories.Interfaces;
 using Domain.Entities;
 
 namespace Application.Features.Transmissions.Rules;
 
-public class TransmissionBusinessRules: BusinessRules<Transmission> 
+public class TransmissionBusinessRules : BusinessRules<Transmission>
 {
     private readonly ITransmissionRepository _transmissionRepository;
 
