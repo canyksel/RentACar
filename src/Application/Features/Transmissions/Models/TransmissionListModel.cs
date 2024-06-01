@@ -2,7 +2,7 @@
 
 namespace Application.Features.Transmissions.Models;
 
-public class TransmissionModel
+public class TransmissionListModel
 {
     public IList<TransmissionListDto> Items { get; set; }
 }
