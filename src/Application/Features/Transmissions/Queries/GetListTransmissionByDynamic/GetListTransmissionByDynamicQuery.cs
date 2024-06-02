@@ -7,17 +7,12 @@ using Core.Paging;
 using Domain.Entities;
 using MediatR;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Application.Features.Transmissions.Queries.GetListTransmissionByDynamic;
 
 public class GetListTransmissionByDynamicQuery : IRequest<TransmissionListModel>
 {
-    public Dynamic Dynamic {  get; set; }
+    public Dynamic Dynamic { get; set; }
     public PageRequest PageRequest { get; set; }
 
     public class GetListTransmissionByDynamicQueryHandler : IRequestHandler<GetListTransmissionByDynamicQuery, TransmissionListModel>
@@ -41,7 +36,7 @@ public class GetListTransmissionByDynamicQuery : IRequest<TransmissionListModel>
 
             TransmissionListModel mappedTransmissionListModel = _mapper.Map<TransmissionListModel>(transmissions);
 
-            return mappedTransmissionListModel; 
+            return mappedTransmissionListModel;
         }
     }
 }
