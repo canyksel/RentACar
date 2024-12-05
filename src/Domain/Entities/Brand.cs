@@ -1,4 +1,5 @@
 ﻿using Core.Repositories;
+using System.Collections.Generic;
 
 namespace Domain.Entities;
 
